@@ -1,0 +1,67 @@
+﻿@model ClinicManagement.Core.ViewModel.SearchViewModel
+@{
+    ViewBag.Title = "SearchDoctor";
+}
+
+<style>
+    .space {
+        height: 10px;
+        width: 100%;
+    }
+</style>
+
+<h2>Doctor result</h2>
+<div class="space"></div>
+<div class="space"></div>
+
+@if (Model != null && Model.RecommendedDoctors.Count > 0)
+{
+    <h3>Recommended Doctors</h3>
+    <div class="space"></div>
+    <div class="row">
+        @foreach (var item in Model.RecommendedDoctors)
+        {
+
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">@item.Specialization.Name</p>
+                        <a href="/Appointments/Create?doctorId=@item.Id" class="btn btn-primary">Book Appointment</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else if (Model != null && Model.RequiredSpecialization != null)
+{
+    <h3>Recommended Doctors</h3>
+    <div class="space"></div>
+    <p>Sorry, currently, we dont have any @Model.RequiredSpecialization, Please consult with @Model.RequiredSpecialization for your symptoms. </p>
+}
+
+@if (Model != null && Model.AllDoctors.Count > 0)
+{
+    <div class="space"></div>
+    <div class="space"></div>
+    <div class="space"></div>
+    <h3>All Doctors</h3>
+    <div class="space"></div>
+    <div class="row">
+        @foreach (var item in Model.AllDoctors)
+        {
+
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">@item.Specialization.Name</p>
+                        <a href="/Appointments/Create?doctorId=@item.Id" class="btn btn-primary">Book Appointment</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
